@@ -1,5 +1,9 @@
 <?php
 
+if (isset($_GET['id'])){
+
+    $id = $_GET['id'];
+
 //1. Buat koneksi dengan MYSQL
 $con = mysqli_connect("localhost","root","","fakultas");
 
@@ -11,7 +15,7 @@ if(mysqli_connect_errno()){
 }
 
 //3. Membaca data dari table mysql
-$query = "SELECT * FROM mahasiswa WHERE id=2";
+$query = "SELECT * FROM mahasiswa WHERE id=$id";
 
 //4. Tampilkan data, dengan menjalankan sql query
 $result = mysqli_query($con,$query);
@@ -27,6 +31,8 @@ if ($result) {
 //5. Tutup koneksi mysql
 mysqli_close($con);
 
+}
+
 //tanggkap data dari form submit
 if (isset($_POST['submit'])){
     $nim = $_POST['nim'];
@@ -36,6 +42,7 @@ if (isset($_POST['submit'])){
     $tgl_lahir = $_POST['tgl_lahir'];
     $gender = $_POST['gender'];
     $alamat = $_POST['alamat'];
+    $id = $_POST['id'];
 
     // 1. Buat koneksi dengan MySQL
     $con = mysqli_connect("localhost","root","","fakultas");
@@ -44,16 +51,16 @@ if (isset($_POST['submit'])){
     if(mysqli_connect_errno()) {
         echo "Koneksi Gagal " . mysqli_connect_error();
     }else{
-        echo 'Koneksi Berhasil';
+        echo "Koneksi Berhasil";
     }
     // buat sql query untuk insert ke database
     // buat query insert dan jalankan
     $sql = "UPDATE mahasiswa SET nim='$nim',nama='$nama',id_jurusan='$id_jurusan',tempat_lahir='$tpt_lahir',
-        tanggal_lahir='$tgl_lahir',alamat='$alamat' WHERE id=2 ";
+        tanggal_lahir='$tgl_lahir',alamat='$alamat' WHERE id=$id ";
 
 
     // jalankan query
-    if (mysqli_query($con, $sql)){
+    if (mysqli_query($con, $sql)) {
         echo "Data berhasil diubah";
     } else {
         echo "Ada Error ". mysqli_error($con);
@@ -74,17 +81,18 @@ if (isset($_POST['submit'])){
     <title>Document</title>
 </head>
 <body>
-    <h1>Update Data Mahasiswa</h1>
+<h1>Update Data Mahasiswa</h1>
     <?php //var_dump($mahasiswa); ?>
-    <form action="update.php" method="post">
-        NIM: <input type="text" name="nim" value="<?php echo $mahasiswa['nim']; ?>"><br>
-        Nama: <input type="text" name="nama" value="<?php echo $mahasiswa['nama']; ?>"><br>
-        ID Jurusan: <input type="number" name="id_jurusan" value="<?php echo $mahasiswa['id_jurusan']; ?>"><br>
-        Jenis Kelamin: <input type="text" name="gender" value="<?php echo $mahasiswa['jenis_kelamin']; ?>"><br>
-        Tempat Lahir: <input type="text" name="tpt_lahir" value="<?php echo $mahasiswa['tempat_lahir']; ?>"><br>
-        Tanggal Lahir (yyyy-mm-dd): <input type="text" name="tgl_lahir" value="<?php echo $mahasiswa['tanggal_lahir']; ?>"><br>
-        Alamat: <input type="text" name="alamat" value="<?php echo $mahasiswa['alamat']; ?>"><br>
-        <button type="submit" name="submit">Tambah Data</button>
+     <form action="update.php" method="post">
+        NIM: <input type="text" name="nim" value="<?php echo $mahasiswa ['nim']; ?>"><br>
+        Nama: <input type="text" name="nama" value="<?php echo $mahasiswa ['nama']; ?>"><br>
+        ID Jurusan: <input type="number" name="id_jurusan" value="<?php echo $mahasiswa ['id_jurusan']; ?>"><br>
+        Jenis Kelamin: <input type="text" name="gender" value="<?php echo $mahasiswa ['jenis_kelamin']; ?>"><br>
+        Tempat Lahir: <input type="text" name="tpt_lahir" value="<?php echo $mahasiswa ['tempat_lahir']; ?>"><br>
+        Tanggal Lahir (yyyy-mm-dd): <input type="text" name="tgl_lahir" value="<?php echo $mahasiswa ['tanggal_lahir']; ?>"><br>
+        Alamat: <input type="text" name="alamat" value="<?php echo $mahasiswa ['alamat']; ?>"><br>
+        <input type="number" name="id" value="<?php echo $mahasiswa['id'] ?>" hidden>
+        <button type="submit" name="submit">Update Data</button>
     </form>
 </body>
 </html>

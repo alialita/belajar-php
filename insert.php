@@ -26,7 +26,7 @@
         if (mysqli_query($con, $sql)){
             echo "New Record Created Successfully";
         } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($con);
+            echo "Terdapat kesalahan". mysqli_error($con);
         }
           
         mysqli_close($con);
@@ -44,7 +44,7 @@
 <body>
     <h1>Tambah Data</h1>
 
-    <form action="" method="post">
+    <form action="update.php" method="post">
         NIM: <input type="text" name="nim"><br>
         Nama: <input type="text" name="nama"><br>
         ID Jurusan: <input type="number" name="id_jurusan"><br>
