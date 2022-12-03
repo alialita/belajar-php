@@ -44,7 +44,7 @@
 <body>
     <h1>Tambah Data</h1>
 
-    <form action="update.php" method="post">
+    <form action="insert.php" method="post">
         NIM: <input type="text" name="nim"><br>
         Nama: <input type="text" name="nama"><br>
         ID Jurusan: <input type="number" name="id_jurusan"><br>
