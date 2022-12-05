@@ -83,7 +83,7 @@ if (isset($_POST['submit'])){
 <body>
 <h1>Update Data Mahasiswa</h1>
     <?php //var_dump($mahasiswa); ?>
-     <form action="insert.php" method="post">
+     <form action="update.php" method="post">
         NIM: <input type="text" name="nim" value="<?php echo $mahasiswa ['nim']; ?>"><br>
         Nama: <input type="text" name="nama" value="<?php echo $mahasiswa ['nama']; ?>"><br>
         ID Jurusan: <input type="number" name="id_jurusan" value="<?php echo $mahasiswa ['id_jurusan']; ?>"><br>
